@@ -43,9 +43,17 @@
 using namespace std;
 
 /**
+ * Threshold for zero.
+ */
+#define EPSELEN 1.0e-5
+/**
  * Test if real value is zero.
  */
-#define IS_ZERO(v) (abs(v) < 1.0e-5)
+#define IS_ZERO(v) (abs(v) < EPSELEN)
+/**
+ * Signum function.
+ */
+#define SIGN(v) (int)(((v) > EPSELEN) - ((v) < -EPSELEN))
 /**
  * Amount of lines representing each Bezier segment.
  */
@@ -273,6 +281,21 @@ bool tbezierSO0(const vector<Point2D> &values, vector<Segment> &curve)
         {
             tgR = Point2D();
         }
+
+        // There is actually a little mistake in the white paper (http://sv-journal.org/2017-1/04.php?lang=en):
+        // algorithm described after figure 14 implicitly assumes that tangent vectors point inside the
+        // A_i and B_i areas (see fig. 14). However in practice they can point outside as well. If so, tangents’
+        // coordinates should be clamped to the border of A_i or B_i respectively to keep control points inside
+        // the described area and thereby to avoid false extremes and loops on the curve.
+        // The clamping is implemented by the next 4 if-statements.
+        if (SIGN(tgL.x) != SIGN(deltaC.x))
+            tgL.x = 0.0;
+        if (SIGN(tgL.y) != SIGN(deltaC.y))
+            tgL.y = 0.0;
+        if (SIGN(tgR.x) != SIGN(deltaC.x))
+            tgR.x = 0.0;
+        if (SIGN(tgR.y) != SIGN(deltaC.y))
+            tgR.y = 0.0;
 
         zL = IS_ZERO(tgL.x);
         zR = IS_ZERO(tgR.x);
