@@ -15,6 +15,6 @@ between smoothness and interpolation accuracy.
 tbezierSO0 is recommended for advertising purposes as it produces nicer looking curves while
 the accuracy is in common case lower.
 
-Read this for algorithm details: <URL>
+Read this for algorithm details: http://sv-journal.org/2017-1/04.php?lang=en
 
 Written by Konstantin Ryabinin under terms of MIT license.
