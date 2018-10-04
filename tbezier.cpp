@@ -45,15 +45,15 @@ using namespace std;
 /**
  * Threshold for zero.
  */
-#define EPSELEN 1.0e-5
+#define EPSILON 1.0e-5
 /**
  * Test if real value is zero.
  */
-#define IS_ZERO(v) (abs(v) < EPSELEN)
+#define IS_ZERO(v) (abs(v) < EPSILON)
 /**
  * Signum function.
  */
-#define SIGN(v) (int)(((v) > EPSELEN) - ((v) < -EPSELEN))
+#define SIGN(v) (int)(((v) > EPSILON) - ((v) < -EPSILON))
 /**
  * Amount of lines representing each Bezier segment.
  */
