@@ -64,7 +64,7 @@ using namespace std;
 #define C 2.0
 
 /**
- * The Point2D class provides methods to store and habdle 2d points.
+ * The Point2D class provides methods to store and handle 2d points.
  */
 class Point2D
 {
